@@ -1,0 +1,48 @@
+CREATE TABLE lokacija (
+    id	         INTEGER PRIMARY KEY AUTOINCREMENT,
+    naziv        TEXT UNIQUE NOT NULL,
+    regija       TEXT CHECK (regija IN ('Pomurska', 'Podravska'
+		   'Koroška', 'Savinjska', 'Posavska', 'Zasavska',
+		   'Osrednjeslovenska', 'Gorenjska', 'Goriška'
+		   'Obalno-kraška', 'Pomursko-notranjska', 
+		   'Jugovzhodna-Slovenija')),
+    opis         TEXT NOT NULL,
+    url          TEXT,
+    pogostitev   TEXT CHECK (pogostitev IN ('Da', 'Ne'),
+    prenočišče   TEXT CHECK (prenočišče IN ('Da', 'Ne'),
+    za_otroke    TEXT CHECK (za_otroke IN ('Da', 'Ne')
+);
+
+CREATE TABLE namen(
+    id 	     INTEGER PRIMARY KEY AUTOINCREMENT,
+    naziv    TEXT UNIQUE NOT NULL
+);
+
+CREATE TABLE čas(
+    id 	     INTEGER PRIMARY KEY AUTOINCREMENT,
+    naziv    TEXT UNIQUE NOT NULL
+);
+
+CREATE TABLE vrsta(
+    id 	     INTEGER PRIMARY KEY AUTOINCREMENT,
+    naziv    TEXT UNIQUE NOT NULL
+);
+
+CREATE TABLE kdaj_obiskati(
+    lokacija    INTEGER REFERENCES lokacija(id),
+    čas         INTEGER REFERENCES čas(id),
+    PRIMARY KEY (lokacija, čas)
+);
+
+CREATE TABLE kaj_si_želimo(
+    lokacija    INTEGER REFERENCES lokacija(id),
+    namen       INTEGER REFERENCES namen(id),
+    PRIMARY KEY (lokacija, namen)
+);
+
+CREATE TABLE kaj_nas_zanima(
+    lokacija    INTEGER REFERENCES lokacija(id),
+    vrsta       INTEGER REFERENCES vrsta(id),
+    PRIMARY KEY (lokacija, vrsta)
+);
+
