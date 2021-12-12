@@ -3,7 +3,8 @@ Projektna naloga pri predmetu Podatkovne baze 1
 Osnovna ideja je nabor lokacij kam lahko gremo na izlet po sloveniji. Uporabnik lahko potem filtrira glede na regije po Sloveniji, namen izleta, primeren (letni) čas izleta itd. 
 
 ER diagram:
-![ERD](https://user-images.githubusercontent.com/28532399/145730248-d92bc741-3dc7-48ff-89f9-4c63372917fd.png)
+![ERD](https://user-images.githubusercontent.com/28532399/145731108-251c36ba-59cf-4bb7-9807-c24197bc2dd1.png)
+
 Glavna entiteta **Lokacija** predstavlja osnovne lastnosti vsake lokacije: id, naziv, regija, kratek opis, URL povezava ter informacije ali lokacija omogoča pogostitev (hrana in pijača), prenočišče ter ali je primerno tudi za (manjše) otroke.
 
 Omenjena entiteta **Lokacija** je s pomočjo povezovalne tabele **Kdaj obiskati** povezana z entiteto **Čas**, ki da informacijo, v katerem (letnem) času je to lokacijo primerno obiskati, npr.: _poletni čas, zimski čas_ ter _tudi v slabem vremenu_.
@@ -11,3 +12,54 @@ Omenjena entiteta **Lokacija** je s pomočjo povezovalne tabele **Kdaj obiskati*
 Podobno je s pomočjo povezovalne tabele **Kaj nas zanima** povezana z entiteto **Vrsta**, kjer so shranjene lastnosti vsake lokacije oz. za kakšno vrsto se gre, npr.: _grad, muzej, smučišče, znamenitost, kopališče ali terme_ ali _atraktivni kotiček_.
 
 Na koncu imamo še eno povezovalno tabelo **Kaj si želimo** s katero je ponovno entiteta **Lokacija** povezana z entiteto **Namen**, na podlagi katere bi lahko uporabnik kasneje filtriral rezultate žlede na svoje želje, kaj želi z obiskom določene lokacije doseči, to je na primer _sprostitev, rekreacija, izobraževanje, ogled znamenitosti, oddih v naravi..._
+
+**IDEJA ZAPISA:**
+CREATE TABLE lokacija (
+    id	         INTEGER PRIMARY KEY AUTOINCREMENT,
+    naziv        TEXT UNIQUE NOT NULL,
+    regija       TEXT CHECK (regija IN ('Pomurska', 'Podravska'
+		   'Koroška', 'Savinjska', 'Posavska', 'Zasavska',
+		   'Osrednjeslovenska', 'Gorenjska', 'Goriška'
+		   'Obalno-kraška', 'Pomursko-notranjska', 
+		   'Jugovzhodna-Slovenija')),
+    opis         TEXT NOT NULL,
+    url          TEXT,
+    pogostitev   TEXT CHECK (pogostitev IN ('Da', 'Ne'),
+    prenočišče   TEXT CHECK (prenočišče IN ('Da', 'Ne'),
+    za_otroke    TEXT CHECK (za_otroke IN ('Da', 'Ne')
+);
+
+CREATE TABLE namen(
+    id 	     INTEGER PRIMARY KEY AUTOINCREMENT,
+    naziv    TEXT UNIQUE NOT NULL
+);
+
+CREATE TABLE čas(
+    id 	     INTEGER PRIMARY KEY AUTOINCREMENT,
+    naziv    TEXT UNIQUE NOT NULL
+);
+
+CREATE TABLE vrsta(
+    id 	     INTEGER PRIMARY KEY AUTOINCREMENT,
+    naziv    TEXT UNIQUE NOT NULL
+);
+
+CREATE TABLE kdaj_obiskati(
+    lokacija    INTEGER REFERENCES lokacija(id),
+    čas         INTEGER REFERENCES čas(id),
+    PRIMARY KEY (lokacija, čas)
+);
+
+CREATE TABLE kaj_si_želimo(
+    lokacija    INTEGER REFERENCES lokacija(id),
+    namen       INTEGER REFERENCES namen(id),
+    PRIMARY KEY (lokacija, namen)
+);
+
+CREATE TABLE kaj_nas_zanima(
+    lokacija    INTEGER REFERENCES lokacija(id),
+    vrsta       INTEGER REFERENCES vrsta(id),
+    PRIMARY KEY (lokacija, vrsta)
+);
+
+
