@@ -13,53 +13,5 @@ Podobno je s pomočjo povezovalne tabele **Kaj nas zanima** povezana z entiteto 
 
 Na koncu imamo še eno povezovalno tabelo **Kaj si želimo** s katero je ponovno entiteta **Lokacija** povezana z entiteto **Namen**, na podlagi katere bi lahko uporabnik kasneje filtriral rezultate žlede na svoje želje, kaj želi z obiskom določene lokacije doseči, to je na primer _sprostitev, rekreacija, izobraževanje, ogled znamenitosti, oddih v naravi..._
 
-**IDEJA ZAPISA:**
-CREATE TABLE lokacija (
-    id	         INTEGER PRIMARY KEY AUTOINCREMENT,
-    naziv        TEXT UNIQUE NOT NULL,
-    regija       TEXT CHECK (regija IN ('Pomurska', 'Podravska'
-		   'Koroška', 'Savinjska', 'Posavska', 'Zasavska',
-		   'Osrednjeslovenska', 'Gorenjska', 'Goriška'
-		   'Obalno-kraška', 'Pomursko-notranjska', 
-		   'Jugovzhodna-Slovenija')),
-    opis         TEXT NOT NULL,
-    url          TEXT,
-    pogostitev   TEXT CHECK (pogostitev IN ('Da', 'Ne'),
-    prenočišče   TEXT CHECK (prenočišče IN ('Da', 'Ne'),
-    za_otroke    TEXT CHECK (za_otroke IN ('Da', 'Ne')
-);
-
-CREATE TABLE namen(
-    id 	     INTEGER PRIMARY KEY AUTOINCREMENT,
-    naziv    TEXT UNIQUE NOT NULL
-);
-
-CREATE TABLE čas(
-    id 	     INTEGER PRIMARY KEY AUTOINCREMENT,
-    naziv    TEXT UNIQUE NOT NULL
-);
-
-CREATE TABLE vrsta(
-    id 	     INTEGER PRIMARY KEY AUTOINCREMENT,
-    naziv    TEXT UNIQUE NOT NULL
-);
-
-CREATE TABLE kdaj_obiskati(
-    lokacija    INTEGER REFERENCES lokacija(id),
-    čas         INTEGER REFERENCES čas(id),
-    PRIMARY KEY (lokacija, čas)
-);
-
-CREATE TABLE kaj_si_želimo(
-    lokacija    INTEGER REFERENCES lokacija(id),
-    namen       INTEGER REFERENCES namen(id),
-    PRIMARY KEY (lokacija, namen)
-);
-
-CREATE TABLE kaj_nas_zanima(
-    lokacija    INTEGER REFERENCES lokacija(id),
-    vrsta       INTEGER REFERENCES vrsta(id),
-    PRIMARY KEY (lokacija, vrsta)
-);
 
 
