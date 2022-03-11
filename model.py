@@ -8,7 +8,7 @@ conn = sqlite3.connect('KamNaIzlet.db')
 baza.ustvari_bazo_ce_ne_obstaja(conn)
 conn.execute('PRAGMA foreign_keys = ON')
 
-uporabnik, lokacija, cas, vrsta, namen, pripadaVrsta, pripadaNamen = baza.pripravi_tabele(conn)
+uporabnik, lokacija, čas, vrsta, namen, pripadaVrsta, pripadaNamen = baza.pripravi_tabele(conn)
 
 class LoginError(Exception):
     """
@@ -131,6 +131,23 @@ def lokacije_glede_na_vrsto(vrsta):
         idji_lokacij.append(id_lokacije)
     return idji_lokacij
 
+def vrste_lokacije(id_lokacije):
+    '''
+    Funkcija vrne vse vrste lokacije, ki ima podan ID.
+    '''
+    poizvedba = """
+        SELECT vrsta.naziv
+        FROM vrsta
+        JOIN pripadaVrsta ON vrsta.id = pripadaVrsta.vrsta
+        JOIN lokacija ON pripadaVrsta.lokacija = lokacija.id
+        WHERE lokacija.id = ?
+    """
+    vrste_lokacije = []
+    for (vrsta_lokacije,) in conn.execute(poizvedba, [id_lokacije]):
+        vrste_lokacije.append(vrsta_lokacije)
+    return vrste_lokacije
+    
+
 # ISKANJE PO NAMENU LOKACIJE
 def seznam_namenov_lokacij():
     '''
@@ -163,6 +180,55 @@ def lokacije_glede_na_namen(namen):
         idji_lokacij.append(id_lokacije)
     return idji_lokacij
 
+def nameni_lokacije(id_lokacije):
+    '''
+    Funkcija vrne vse namene lokacije, ki ima podan ID.
+    '''
+    poizvedba = """
+        SELECT namen.naziv
+        FROM namen
+        JOIN pripadaNamen ON namen.id = pripadaNamen.namen
+        JOIN lokacija ON pripadaNamen.lokacija = lokacija.id
+        WHERE lokacija.id = ?
+    """
+    nameni_lokacije = []
+    for (namen_lokacije,) in conn.execute(poizvedba, [id_lokacije]):
+        nameni_lokacije.append(namen_lokacije)
+    return nameni_lokacije
+
+# ISKANJE LOKACIJ GLEDE NA ČAS OBISKA
+
+def lokacije_glede_na_čas_obiska(čas_obiska):
+    """
+    Funkcija vrne seznam IDjev vseh lokacij, za katere primeren čas obiska ustreza podanemu.
+    """
+    poizvedba = """
+        SELECT lokacija.id FROM lokacija
+        JOIN čas ON lokacija.id = čas.lokacija
+        WHERE čas.tip = ?
+        ORDER BY lokacija.id
+    """
+    idji_lokacij = []
+    for (id_lokacije,) in conn.execute(poizvedba, [čas_obiska]):
+        idji_lokacij.append(id_lokacije)
+    return idji_lokacij
+
+def čas_obiska_lokacije(id_lokacije):
+    '''
+    Funkcija vrne vse primerne čase obiska lokacije, ki ima podan ID.
+    '''
+    poizvedba = """
+        SELECT čas.tip
+        FROM čas
+        JOIN lokacija ON čas.lokacija = lokacija.id
+        WHERE lokacija.id = ?
+    """
+    časi_obiska_lokacije = []
+    for (čas_obiska_lokacije,) in conn.execute(poizvedba, [id_lokacije]):
+        časi_obiska_lokacije.append(čas_obiska_lokacije)
+    return časi_obiska_lokacije
+    
+
 # ISKANJE LOKACIJ S POGOSTITVIJO IN PRENOČIŠČEM
 def lokacije_pogostitev_in_prenocisce():
     """
@@ -172,7 +238,7 @@ def lokacije_pogostitev_in_prenocisce():
         SELECT id 
         FROM lokacija
         WHERE pogostitev = 'Da'
-        AND prenocišce = 'Da'
+        AND prenočišče = 'Da'
         ORDER BY id
     """
     idji_lokacij = []
@@ -194,7 +260,23 @@ def lokacije_otroci():
     idji_lokacij = []
     for (id_lokacije,) in conn.execute(poizvedba):
         idji_lokacij.append(id_lokacije)
-    return idji_lokacij    
+    return idji_lokacij
+
+# ISKANJE LOKACIJ BREZ VSTOPNINE
+def lokacije_brez_vstopnine():
+    """
+    Funkcija vrne seznam IDjev vseh lokacij, ki so brez vstopnine.
+    """
+    poizvedba = """
+        SELECT id 
+        FROM lokacija
+        WHERE vstopnina = 'Ne'
+        ORDER BY id
+    """
+    idji_lokacij = []
+    for (id_lokacije,) in conn.execute(poizvedba):
+        idji_lokacij.append(id_lokacije)
+    return idji_lokacij
 
 # IZPISOVANJE PODATKOV LOKACIJ        
 def podatki_lokacij(idji_lokacij):
@@ -213,7 +295,7 @@ def podatki_lokacije(id_lokacije):
     Funkcija vrne podatke o lokaciji z danim IDjem.
     """
     poizvedba = """
-    SELECT naziv, regija, url
+    SELECT naziv, regija, opis, url, pogostitev, prenočišče, vstopnina, zaOtroke
     FROM lokacija
     WHERE id = ?
     """
@@ -222,7 +304,7 @@ def podatki_lokacije(id_lokacije):
     if osnovni_podatki is None:
         return None
     else:
-        naziv, regija, url = osnovni_podatki
-    return naziv, regija, url
+        naziv, regija, opis, url, pogostitev, prenočišče, vstopnina, zaOtroke = osnovni_podatki
+    return naziv, regija, opis, url, pogostitev, prenočišče, vstopnina, zaOtroke
 
         
