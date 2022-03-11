@@ -1,229 +1,158 @@
-lokacija;naziv;
-1;Ogled znamenitosti;
-1;Izobraûevanje;
-2;Ogled znamenitosti;
-3;Sprostitev;
-3;Zabava ;
-3;Ogled znamenitosti;
-4;Ogled znamenitosti;
-5;Sprostitev;
-5;Zabava ;
-6;Ogled znamenitosti;
-6;Izobraûevanje;
-7;Sprostitev;
-7;Zabava ;
-8;Sprostitev;
-8;Zabava ;
-8;Oddih v naravi;
-8;Izobraûevanje;
-9;Sprostitev;
-10;Oddih v naravi;
-11;Zabava ;
-11;Sprostitev;
-12;Sprostitev;
-12;Zabava ;
-13;Zabava ;
-13;Oddih v naravi;
-14;Pohodniötvo;
-14;Oddih v naravi;
-15;Izobraûevanje;
-15;Ogled znamenitosti;
-16;Sprostitev;
-16;Rekreacija;
-16;Pohodniötvo;
-16;Oddih v naravi;
-17;Oddih v naravi;
-17;Sprostitev;
-18;Oddih v naravi;
-18;Sprostitev;
-18;Izobraûevanje;
-19;Sprostitev;
-19;Zabava ;
-19;Rekreacija;
-20;Ogled znamenitosti;
-20;Izobraûevanje;
-21;Izobraûevanje;
-21;Ogled znamenitosti;
-22;Ogled znamenitosti;
-22;Izobraûevanje;
-23;Rekreacija;
-23;Oddih v naravi;
-23;Pohodniötvo;
-24;Sprostitev;
-24;Zabava ;
-25;Zabava ;
-25;Izobraûevanje;
-26;Izobraûevanje;
-26;Ogled znamenitosti;
-27;Zabava ;
-27;Rekreacija;
-27;Sprostitev;
-28;Izobraûevanje;
-29;Sprostitev;
-30;Sprostitev;
-30;Zabava ;
-31;Izobraûevanje;
-31;Ogled znamenitosti;
-32;Izobraûevanje;
-32;Ogled znamenitosti;
-33;Izobraûevanje;
-33;Sprostitev;
-33;Zabava ;
-34;Izobraûevanje;
-34;Ogled znamenitosti;
-35;Zabava ;
-35;Izobraûevanje;
-36;Zabava ;
-36;Sprostitev;
-37;Ogled znamenitosti;
-37;Izobraûevanje;
-38;Zabava ;
-38;Rekreacija;
-39;Sprostitev;
-40;Izobraûevanje;
-40;Ogled znamenitosti;
-41;Izobraûevanje;
-41;Ogled znamenitosti;
-42;Zabava ;
-42;Izobraûevanje;
-43;Izobraûevanje;
-43;Zabava ;
-44;Oddih v naravi;
-44;Pohodniötvo;
-44;Rekreacija;
-45;Rekreacija;
-45;Oddih v naravi;
-46;Oddih v naravi;
-46;Rekreacija;
-46;Pohodniötvo;
-47;Ogled znamenitosti;
-47;Izobraûevanje;
-48;Ogled znamenitosti;
-48;Izobraûevanje;
-49;Oddih v naravi;
-49;Rekreacija;
-50;Rekreacija;
-50;Oddih v naravi;
-51;Oddih v naravi;
-51;Rekreacija;
-52;Pohodniötvo;
-52;Rekreacija;
-52;Oddih v naravi;
-53;Izobraûevanje;
-54;Oddih v naravi;
-54;Rekreacija;
-55;Ogled znamenitosti;
-56;Oddih v naravi;
-57;Oddih v naravi;
-57;Rekreacija;
-61;Rekreacija;
-61;Pohodniötvo;
-61;Oddih v naravi;
-61;Adrenalinska doûivetja;
-12;Adrenalinska doûivetja;
-60;Oddih v naravi;
-59;Oddih v naravi;
-59;Rekreacija;
-62;Rekreacija;
-62;Oddih v naravi;
-63;Oddih v naravi;
-63;Rekreacija;
-63;Adrenalinska doûivetja;
-64;Izobraûevanje;
-64;Ogled znamenitosti;
-65;Pohodniötvo;
-65;Oddih v naravi;
-66;Oddih v naravi;
-66;Zabava ;
-67;Zabava ;
-68;Izobraûevanje;
-69;Zabava ;
-69;Oddih v naravi;
-70;Zabava ;
-70;Ogled znamenitosti;
-71;Ogled znamenitosti;
-71;Izobraûevanje;
-72;Izobraûevanje;
-73;Izobraûevanje;
-73;Ogled znamenitosti;
-74;Ogled znamenitosti;
-75;Zabava ;
-76;Adrenalinska doûivetja;
-76;Zabava ;
-77;Zabava ;
-77;Oddih v naravi;
-78;Oddih v naravi;
-78;Adrenalinska doûivetja;
-78;Zabava ;
-78;Rekreacija;
-78;Pohodniötvo;
-79;Izobraûevanje;
-79;Zabava ;
-80;Izobraûevanje;
-80;Zabava ;
-81;Izobraûevanje;
-82;Sprostitev;
-83;Sprostitev;
-83;Zabava ;
-84;Zabava ;
-85;Izobraûevanje;
-86;Ogled znamenitosti;
-87;Pohodniötvo;
-87;Oddih v naravi;
-88;Izobraûevanje;
-89;Adrenalinska doûivetja;
-89;Zabava ;
-89;Oddih v naravi;
-90;Izobraûevanje;
-90;Ogled znamenitosti;
-91;Izobraûevanje;
-91;Zabava ;
-92;Izobraûevanje;
-92;Ogled znamenitosti;
-93;Ogled znamenitosti;
-93;Izobraûevanje;
-94;Adrenalinska doûivetja;
-94;Rekreacija;
-94;Oddih v naravi;
-94;Zabava ;
-95;Izobraûevanje;
-95;Ogled znamenitosti;
-96;Izobraûevanje;
-96;Ogled znamenitosti;
-97;Pohodniötvo;
-97;Oddih v naravi;
-98;Sprostitev;
-98;Zabava ;
-99;Izobraûevanje;
-100;Izobraûevanje;
-101;Izobraûevanje;
-101;Zabava ;
-102;Zabava ;
-102;Izobraûevanje;
-103;Izobraûevanje;
-104;Sprostitev;
-104;Zabava ;
-104;Rekreacija;
-105;Izobraûevanje;
-106;Ogled znamenitosti;
-108;Ogled znamenitosti;
-109;Ogled znamenitosti;
-110;Ogled znamenitosti;
-110;Zabava ;
-110;Rekreacija;
-111;Oddih v naravi;
-111;Rekreacija;
-112;Ogled znamenitosti;
-113;Oddih v naravi;
-113;Sprostitev;
-113;Zabava ;
-114;Ogled znamenitosti;
-115;Rekreacija;
-115;Oddih v naravi;
-116;Izobraûevanje;
-117;Ogled znamenitosti;
-117;Izobraûevanje;
-118;Ogled znamenitosti;
-118;Izobraûevanje;
-119;Adrenalinska doûivetja;
-119;Zabava ;
+lokacija;naziv
+1;Gradovi
+1;Muzeji
+2;Znamenitosti
+3;Znamenitosti
+3;Jezera
+3;Atraktivni koticki
+4;Znamenitosti
+5;Kopali≈°ca in terme
+6;Znamenitosti
+6;Muzeji
+7;Atraktivni koticki
+8;Kmetije
+9;Kopali≈°ca in terme
+10;Znamenitosti
+11;Atraktivni koticki
+12;Atraktivni koticki
+13;Atraktivni koticki
+14;Gorovja in hribovja
+14;Jezera
+15;Gradovi
+16;Smuci≈°ca
+16;Gorovja in hribovja
+17;Kmetije
+17;Atraktivni koticki
+18;Atraktivni koticki
+18;Muzeji
+19;Kopali≈°ca in terme
+20;Gradovi
+20;Znamenitosti
+21;Znamenitosti
+21;Muzeji
+22;Muzeji
+22;Jame
+23;Gorovja in hribovja
+24;Atraktivni koticki
+25;Atraktivni koticki
+26;Jame
+26;Muzeji
+27;Atraktivni koticki
+28;Atraktivni koticki
+29;Kopali≈°ca in terme
+30;Kmetije
+31;Gradovi
+31;Muzeji
+32;Muzeji
+32;Gradovi
+33;≈Ωivalski parki, vrtovi
+34;Muzeji
+35;Atraktivni koticki
+36;Kopali≈°ca in terme
+36;Atraktivni koticki
+37;Muzeji
+38;Atraktivni koticki
+39;Kopali≈°ca in terme
+40;Muzeji
+41;Muzeji
+42;≈Ωivalski parki, vrtovi
+43;≈Ωivalski parki, vrtovi
+44;Naravne znamenitosti
+4;Naravne znamenitosti
+14;Naravne znamenitosti
+26;Naravne znamenitosti
+23;Naravne znamenitosti
+45;Naravne znamenitosti
+46;Smuci≈°ca
+46;Naravne znamenitosti
+46;Gorovja in hribovja
+47;Naravne znamenitosti
+47;Jame
+48;Znamenitosti
+49;Naravne znamenitosti
+50;Jezera
+51;Jezera
+52;Gorovja in hribovja
+53;Muzeji
+54;Naravne znamenitosti
+55;Gradovi
+56;Naravne znamenitosti
+57;Naravne znamenitosti
+57;Jezera
+57;Kopali≈°ca in terme
+61;Smuci≈°ca
+61;Gorovja in hribovja
+61;Atraktivni koticki
+60;Naravne znamenitosti
+60;Jezera
+59;Naravne znamenitosti
+62;Jezera
+62;Kopali≈°ca in terme
+63;Kopali≈°ca in terme
+63;Jezera
+64;Znamenitosti
+64;Muzeji
+65;Naravne znamenitosti
+66;Naravne znamenitosti
+66;Atraktivni koticki
+67;Atraktivni koticki
+68;Muzeji
+69;Kmetije
+69;Atraktivni koticki
+70;Atraktivni koticki
+71;Muzeji
+72;Jame
+73;Znamenitosti
+74;Znamenitosti
+75;Atraktivni koticki
+76;Atraktivni koticki
+77;Kmetije
+77;Atraktivni koticki
+78;Kopali≈°ca in terme
+78;Jezera
+79;Kmetije
+80;Kmetije
+81;Muzeji
+82;Kopali≈°ca in terme
+83;Kopali≈°ca in terme
+84;Atraktivni koticki
+85;Atraktivni koticki
+86;Gradovi
+87;Gorovja in hribovja
+88;Atraktivni koticki
+89;Atraktivni koticki
+90;Muzeji
+91;Atraktivni koticki
+92;Muzeji
+93;Znamenitosti
+94;Atraktivni koticki
+95;Muzeji
+96;Muzeji
+97;Naravne znamenitosti
+98;Kopali≈°ca in terme
+99;Atraktivni koticki
+100;Muzeji
+101;Atraktivni koticki
+102;Atraktivni koticki
+103;Atraktivni koticki
+104;Kopali≈°ca in terme
+105;Muzeji
+106;Naravne znamenitosti
+108;Znamenitosti
+109;Znamenitosti
+110;Kopali≈°ca in terme
+110;Znamenitosti
+111;Jezera
+111;Naravne znamenitosti
+112;Znamenitosti
+112;Gradovi
+113;Kmetije
+114;Naravne znamenitosti
+114;Jame
+115;Naravne znamenitosti
+116;Muzeji
+117;Naravne znamenitosti
+117;Jame
+118;Znamenitosti
+118;Gradovi
+119;Atraktivni koticki
