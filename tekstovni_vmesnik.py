@@ -29,6 +29,25 @@ def izberi_moznost(moznosti):
                 else:
                     print(f'NAPAKA: vnesti morate število med 1 in {stevilo_moznosti}!')
 
+# IZBIRA 1
+def izberi_lokacijo():
+    niz = input("Vnesite del naziva lokacije > ")
+    idji_lokacij = model.poisci_lokacije(niz)
+    moznosti = [
+        "{} ({})".format(naziv, regija) for _, naziv, regija in model.podatki_lokacij(idji_lokacij)
+        ]
+    izbira = izberi_moznost(moznosti)
+    return None if izbira is None else idji_lokacij[izbira]
+
+def prikazi_podatke_lokacije():
+    id_lokacije = izberi_lokacijo()
+    if id_lokacije is None:
+        print("Nobena lokacija ne ustreza iskanemu nizu.")
+    else:
+        naziv, regija, url = model.podatki_lokacije(id_lokacije)
+        print(f"{naziv}, {regija}: {url}")
+
+# IZBIRA 2
 def izberi_regijo():
     regije = ['Pomurska', 'Podravska', 'Koroška', 'Savinjska', 'Posavska', 'Zasavska', 'Osrednjeslovenska', 'Gorenjska', 'Goriška', 'Obalno-kraška', 'Primorsko-notranjska', 'Jugovzhodna-Slovenija']
     izbira = izberi_moznost([ 
@@ -46,35 +65,89 @@ def izberi_regijo():
         'Jugovzhodna-Slovenija'
         ])
     return regije[izbira]
-
-def izberi_lokacijo():
-    niz = input("Vnesite del naziva lokacije > ")
-    idji_lokacij = model.poisci_lokacije(niz)
+    
+def poisci_lokacije_regije():
+    regija = izberi_regijo()
+    idji_lokacij = model.poisci_lokacije_regije(regija)
+    print()
+    print(f'Lokacije v regiji {regija}:')
     moznosti = [
         "{} ({})".format(naziv, regija) for _, naziv, regija in model.podatki_lokacij(idji_lokacij)
         ]
     izbira = izberi_moznost(moznosti)
-    return None if izbira is None else idji_lokacij[izbira]
-    
-def poisci_lokacije_regije():
-    regija =  izberi_regijo()
-    print(f'Zanima vas lokacija v regiji {regija}.')
+    naziv, regija, url = model.podatki_lokacije(idji_lokacij[izbira])
+    print(f"{naziv}, {regija}: {url}")
 
-def prikazi_podatke_lokacije():
-    id_lokacije = izberi_lokacijo()
-    if id_lokacije is None:
-        print("Nobena lokacija ne ustreza iskanemu nizu.")
-    else:
-        naziv, regija, url = model.podatki_lokacije(id_lokacije)
-        print(f"{naziv}, {regija}: {url}")
-        
+# IZBIRA 3
+def izberi_vrsto():
+    vse_vrste = model.seznam_vrst_lokacij()
+    izbira = izberi_moznost(vse_vrste)
+    return vse_vrste[izbira]
+
+def poisci_lokacije_vrsta():
+    vrsta = izberi_vrsto()
+    idji_lokacij = model.lokacije_glede_na_vrsto(vrsta)
+    print()
+    print(f"Lokacije vrste {vrsta}")
+    moznosti = [
+        "{} ({})".format(naziv, regija) for _, naziv, regija in model.podatki_lokacij(idji_lokacij)
+        ]
+    izbira = izberi_moznost(moznosti)
+    naziv, regija, url = model.podatki_lokacije(idji_lokacij[izbira])
+    print(f"{naziv}, {regija}: {url}")
+
+# IZBIRA 4
+def izberi_namen():
+    vsi_nameni = model.seznam_namenov_lokacij()
+    izbira = izberi_moznost(vsi_nameni)
+    return vsi_nameni[izbira]
+
+def poisci_lokacije_namen():
+    namen = izberi_namen()
+    idji_lokacij = model.lokacije_glede_na_namen(namen)
+    print()
+    print(f"Lokacije namena {namen}")
+    moznosti = [
+        "{} ({})".format(naziv, regija) for _, naziv, regija in model.podatki_lokacij(idji_lokacij)
+        ]
+    izbira = izberi_moznost(moznosti)
+    naziv, regija, url = model.podatki_lokacije(idji_lokacij[izbira])
+    print(f"{naziv}, {regija}: {url}")
+
+# IZBIRA 4 
+def poisci_lokacije_pogostitev_in_prenocisce():
+    idji_lokacij = model.lokacije_pogostitev_in_prenocisce()
+    print()
+    print("Lokacije s pogostitvijo in prenočiščem: ")
+    moznosti = [
+        "{} ({})".format(naziv, regija) for _, naziv, regija in model.podatki_lokacij(idji_lokacij)
+        ]
+    izbira = izberi_moznost(moznosti)
+    naziv, regija, url = model.podatki_lokacije(idji_lokacij[izbira])
+    print(f"{naziv}, {regija}: {url}")
+
+# IZBIRA 5
+def poisci_lokacije_otroci():
+    idji_lokacij = model.lokacije_otroci()
+    print()
+    print("Lokacije z animacijami za otroke: ")
+    moznosti = [
+        "{} ({})".format(naziv, regija) for _, naziv, regija in model.podatki_lokacij(idji_lokacij)
+        ]
+    izbira = izberi_moznost(moznosti)
+    naziv, regija, url = model.podatki_lokacije(idji_lokacij[izbira])
+    print(f"{naziv}, {regija}: {url}")   
     
-    
+#MENI (izbire):
 def prikazi_moznosti():
     print(50 * '-')
     izbira = izberi_moznost([
         'prikaži podatke lokacije',
-        'prikazi lokacije regije',
+        'prikaži lokacije regije',
+        'prikaži lokacije glede vrsto',
+        'prikaži lokacije glede namen obiska',
+        'prikaži lokacije z možnostjo pogostitve in prenočišča',
+        'prikaži lokacije z animacijami za otroke',
         'izhod',
         ])
     if izbira == 0:
@@ -82,6 +155,14 @@ def prikazi_moznosti():
     elif izbira == 1:
         poisci_lokacije_regije()
     elif izbira == 2:
+        poisci_lokacije_vrsta()
+    elif izbira == 3:
+        poisci_lokacije_namen()
+    elif izbira == 4:
+        poisci_lokacije_pogostitev_in_prenocisce()
+    elif izbira == 5:
+        poisci_lokacije_otroci()
+    elif izbira == 6:
         print('Nasvidenje')
         exit()
 
@@ -91,84 +172,3 @@ def main():
         prikazi_moznosti()
 
 main()
-
-# def vnesi_izbiro(moznosti):
-#     """
-#     Uporabniku da na izbiro podane možnosti.
-#     """
-#     moznosti = list(moznosti)
-#     for i, moznost in enumerate(moznosti, 1):
-#         print(f'{i}) {moznost}')
-#     izbira = None
-#     while True:
-#         try:
-#             izbira = int(input('> ')) - 1
-#             return moznosti[izbira]
-#         except (ValueError, IndexError):
-#             print("Napačna izbira!")
-
-
-
-
-# def izpisi_lokacije_regije(regija):
-#     """
-#     Izpiše vse lokacije podane regije.
-#     """
-#     print(regija)
-#     for naziv, url in regija.lokacije_v_regiji():
-#         print(f'- {naziv}, {url}')
-
-# def poisci_regijo():
-#     """
-#     Poišče regijo, ki jo vnese uporabnik.
-#     """
-#     while True:
-#         regija_uporabnika = input("Katera regija te zanima? Na voljo so: Pomurska, Podravska, Koroška, Savinjska, Posavska, Zasavska, Osrednjeslovenska, Gorenjska, Goriška, Obalno-kraška, Primorsko-notranjska, Jugovzhodna-Slovenija.")
-#         regije = ['Pomurska', 'Podravska', 'Koroška', 'Savinjska', 'Posavska', 'Zasavska', 'Osrednjeslovenska', 'Gorenjska', 'Goriška', 'Obalno-kraška', 'Primorsko-notranjska', 'Jugovzhodna-Slovenija']
-#         if regija_uporabnika not in regije:
-#             print("Regija ni ustrezna. Poskusi znova.")
-#         else:
-#             return regija_uporabnika
-
-# #@prekinitev
-# def iskanje_po_regiji():
-#     """
-#     Izpiše lokacij za regijo, ki jo vnese uporabnik.
-#     """
-#     regija = poisci_regijo()
-#     izpisi_lokacije_regije(regija)
-
-
-
-# def domov():
-#     """
-#     Pozdravi pred izhodom.
-#     """
-#     print('Adijo!')
-# 
-# 
-# class GlavniMeni(Meni):
-#     """
-#     Izbire v glavnem meniju.
-#     """
-#     ISKAL_PO_REGIJI = ('Iskal po regiji', iskanje_po_regiji)
-#     SEL_DOMOV = ('Šel domov', domov)
-
-
-# #@prekinitev
-# def glavni_meni():
-#     """
-#     Prikazuje glavni meni, dokler uporabnik ne izbere izhoda.
-#     """
-#     print('Pozdravljen v bazi filmov!')
-#     while True:
-#         print('Kaj bi rad delal?')
-#         izbira = vnesi_izbiro(GlavniMeni)
-#         izbira.funkcija()
-#         if izbira == GlavniMeni.SEL_DOMOV:
-#             return
-# 
-# 
-# glavni_meni()
-
-
