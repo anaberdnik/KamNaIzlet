@@ -19,6 +19,7 @@ def izberi_moznost(moznosti):
         
         stevilo_moznosti = len(moznosti)
         while True:
+            print()
             izbira = input('Vnesite izbiro > ')
             if not izbira.isdigit():
                 print('NAPAKA: vnesti morate število.')
@@ -29,10 +30,12 @@ def izberi_moznost(moznosti):
                 else:
                     print(f'NAPAKA: vnesti morate število med 1 in {stevilo_moznosti}!')
 
-# IZBIRA 1
+# IZBIRA 0
 def izberi_lokacijo():
+    print()
     niz = input("Vnesite del naziva lokacije > ")
     idji_lokacij = model.poisci_lokacije(niz)
+    print()
     moznosti = [
         "{} ({})".format(naziv, regija) for _, naziv, regija in model.podatki_lokacij(idji_lokacij)
         ]
@@ -43,13 +46,15 @@ def prikazi_podatke_lokacije():
     id_lokacije = izberi_lokacijo()
     if id_lokacije is None:
         print("Nobena lokacija ne ustreza iskanemu nizu.")
+        print()
     else:
-        naziv, regija, url = model.podatki_lokacije(id_lokacije)
-        print(f"{naziv}, {regija}: {url}")
+        izpis_podatkov_lokacije(id_lokacije)
 
-# IZBIRA 2
+# IZBIRA 1
 def izberi_regijo():
     regije = ['Pomurska', 'Podravska', 'Koroška', 'Savinjska', 'Posavska', 'Zasavska', 'Osrednjeslovenska', 'Gorenjska', 'Goriška', 'Obalno-kraška', 'Primorsko-notranjska', 'Jugovzhodna-Slovenija']
+    print()
+    print("Izberite regijo, ki vas zanima: ")
     izbira = izberi_moznost([ 
         'Pomurska',
         'Podravska',
@@ -75,10 +80,10 @@ def poisci_lokacije_regije():
         "{} ({})".format(naziv, regija) for _, naziv, regija in model.podatki_lokacij(idji_lokacij)
         ]
     izbira = izberi_moznost(moznosti)
-    naziv, regija, url = model.podatki_lokacije(idji_lokacij[izbira])
-    print(f"{naziv}, {regija}: {url}")
+    id_lokacije = idji_lokacij[izbira]
+    izpis_podatkov_lokacije(id_lokacije)
 
-# IZBIRA 3
+# IZBIRA 2
 def izberi_vrsto():
     vse_vrste = model.seznam_vrst_lokacij()
     izbira = izberi_moznost(vse_vrste)
@@ -93,10 +98,10 @@ def poisci_lokacije_vrsta():
         "{} ({})".format(naziv, regija) for _, naziv, regija in model.podatki_lokacij(idji_lokacij)
         ]
     izbira = izberi_moznost(moznosti)
-    naziv, regija, url = model.podatki_lokacije(idji_lokacij[izbira])
-    print(f"{naziv}, {regija}: {url}")
+    id_lokacije = idji_lokacij[izbira]
+    izpis_podatkov_lokacije(id_lokacije)
 
-# IZBIRA 4
+# IZBIRA 3
 def izberi_namen():
     vsi_nameni = model.seznam_namenov_lokacij()
     izbira = izberi_moznost(vsi_nameni)
@@ -111,10 +116,26 @@ def poisci_lokacije_namen():
         "{} ({})".format(naziv, regija) for _, naziv, regija in model.podatki_lokacij(idji_lokacij)
         ]
     izbira = izberi_moznost(moznosti)
-    naziv, regija, url = model.podatki_lokacije(idji_lokacij[izbira])
-    print(f"{naziv}, {regija}: {url}")
+    id_lokacije = idji_lokacij[izbira]
+    izpis_podatkov_lokacije(id_lokacije)
 
-# IZBIRA 4 
+# IZBIRA 4
+def poisci_lokacije_čas_obiska():
+    časi_obiska = ['Poletni čas', 'Zimski čas', 'Slabo vreme']
+    izbira = izberi_moznost(časi_obiska)
+    čas_obiska = časi_obiska[izbira]
+    
+    idji_lokacij = model.lokacije_glede_na_čas_obiska(čas_obiska)
+    print()
+    print(f"Lokacije s primernim časom obiska{čas_obiska}: ")
+    moznosti = [
+        "{} ({})".format(naziv, regija) for _, naziv, regija in model.podatki_lokacij(idji_lokacij)
+        ]
+    izbira = izberi_moznost(moznosti)
+    id_lokacije = idji_lokacij[izbira]
+    izpis_podatkov_lokacije(id_lokacije)
+    
+# IZBIRA 5
 def poisci_lokacije_pogostitev_in_prenocisce():
     idji_lokacij = model.lokacije_pogostitev_in_prenocisce()
     print()
@@ -123,10 +144,10 @@ def poisci_lokacije_pogostitev_in_prenocisce():
         "{} ({})".format(naziv, regija) for _, naziv, regija in model.podatki_lokacij(idji_lokacij)
         ]
     izbira = izberi_moznost(moznosti)
-    naziv, regija, url = model.podatki_lokacije(idji_lokacij[izbira])
-    print(f"{naziv}, {regija}: {url}")
+    id_lokacije = idji_lokacij[izbira]
+    izpis_podatkov_lokacije(id_lokacije)
 
-# IZBIRA 5
+# IZBIRA 6
 def poisci_lokacije_otroci():
     idji_lokacij = model.lokacije_otroci()
     print()
@@ -135,19 +156,63 @@ def poisci_lokacije_otroci():
         "{} ({})".format(naziv, regija) for _, naziv, regija in model.podatki_lokacij(idji_lokacij)
         ]
     izbira = izberi_moznost(moznosti)
-    naziv, regija, url = model.podatki_lokacije(idji_lokacij[izbira])
-    print(f"{naziv}, {regija}: {url}")   
+    id_lokacije = idji_lokacij[izbira]
+    izpis_podatkov_lokacije(id_lokacije)
+
+# IZBIRA 7
+def poisci_lokacije_brez_vstopnine():
+    idji_lokacij = model.lokacije_brez_vstopnine()
+    print()
+    print("Lokacije brez vstopnine: ")
+    moznosti = [
+        "{} ({})".format(naziv, regija) for _, naziv, regija in model.podatki_lokacij(idji_lokacij)
+        ]
+    izbira = izberi_moznost(moznosti)
+    id_lokacije = idji_lokacij[izbira]
+    izpis_podatkov_lokacije(id_lokacije)
+    
+
+# IZPIS PODATKOV LOKACIJE
+def izpis_podatkov_lokacije(id_lokacije):
+    '''
+    Funkcija prejme ID lokacije in izpiše vse njene podatke.
+    '''
+    print()
+    naziv, regija, opis, url, pogostitev, prenočišče, vstopnina, zaOtroke = model.podatki_lokacije(id_lokacije)
+    vrste = model.vrste_lokacije(id_lokacije)
+    nameni = model.nameni_lokacije(id_lokacije)
+    časi_obiska_lokacije = model.čas_obiska_lokacije(id_lokacije)
+
+    dolžina_naziva = len(naziv) + len(regija) + 2
+    print(dolžina_naziva * '*')
+    print(f"{naziv}, {regija}")
+    print(dolžina_naziva * '*')
+    
+    print(f"   > Povezava: {url}")
+    print(f"   > Omogoča pogostitev: {pogostitev}")
+    print(f"   > Omogoča prenočišče: {prenočišče}")
+    print(f"   > Ima vstopnino: {vstopnina}")
+    print(f"   > Organizira delavnice za otroke: {zaOtroke}")
+    print(f"   > Kratek opis: {opis}")
+    print(f"   > Vrste: {', '.join(vrste)}")
+    print(f"   > Nameni obiska: {', '.join(nameni)}")
+    print(f"   > Primeren čas obiska: {', '.join(časi_obiska_lokacije)}")
+    print()
+    
     
 #MENI (izbire):
 def prikazi_moznosti():
     print(50 * '-')
+    print('Kaj vas zanima?')
     izbira = izberi_moznost([
         'prikaži podatke lokacije',
         'prikaži lokacije regije',
         'prikaži lokacije glede vrsto',
         'prikaži lokacije glede namen obiska',
+        'prikaži lokacije glede na primeren čas obiska',
         'prikaži lokacije z možnostjo pogostitve in prenočišča',
         'prikaži lokacije z animacijami za otroke',
+        'prikaži lokacije brez vstopnine',
         'izhod',
         ])
     if izbira == 0:
@@ -159,10 +224,14 @@ def prikazi_moznosti():
     elif izbira == 3:
         poisci_lokacije_namen()
     elif izbira == 4:
-        poisci_lokacije_pogostitev_in_prenocisce()
+        poisci_lokacije_čas_obiska()
     elif izbira == 5:
-        poisci_lokacije_otroci()
+        poisci_lokacije_pogostitev_in_prenocisce()
     elif izbira == 6:
+        poisci_lokacije_otroci()
+    elif izbira == 7:
+        poisci_lokacije_brez_vstopnine()
+    elif izbira == 8:
         print('Nasvidenje')
         exit()
 
