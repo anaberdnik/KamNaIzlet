@@ -64,61 +64,139 @@ class Uporabnik:
         except IntegrityError:
             raise LoginError(self.ime)
 
-class Lokacija:
-    """
-    Razred za lokacijo.
-    """
-
-    def __init__(self, naziv, regija, opis, url, pogostitev, prenocišce, vstopnina, zaOtroke, id=None):
-        """
-        Konstruktor filma.
-        """
-        self.id = id
-        self.naziv = naziv
-        self.regija = regija
-        self.opis = opis
-        self.url = url
-        self.pogostitev = pogostitev
-        self.prenocišce = prenocišce
-        self.vstopnina = vstopnina
-        self.zaOtroke = zaOtroke
-
-    def __str__(self):
-        """
-        Znakovna predstavitev filma.
-        Vrne naslov filma.
-        """
-        return self.naziv
-    
-    @staticmethod
-    def lokacije_v_regiji(regija):
-        """
-        Vrne vse lokacije dane regije.
-        """
-        sql = """
-            SELECT naziv, url
-            FROM lokacija
-            WHERE regija = ? 
-        """
-        for naslov, url in conn.execute(sql, [regija]):
-            yield Lokacija(naslov, url)
 
 
+# ISKANJE LOKACIJE PO IMENU
 def poisci_lokacije(niz):
     '''
-    Funkcija vrne id-je vseh filmov, katerih naziv vsebuje dani niz.
+    Funkcija vrne id-je vseh lokacij, katerih naziv vsebuje dani niz.
     '''
     
     poizvedba = """
         SELECT id
         FROM lokacija
-        WHERE naziv like ?
+        WHERE naziv LIKE ?
+        ORDER BY id
     """
     idji_lokacij = []
     for(id_lokacije,) in conn.execute(poizvedba, ['%' + niz + '%']):
         idji_lokacij.append(id_lokacije)
     return idji_lokacij
-        
+
+# ISKANJE PO REGIJAH
+def poisci_lokacije_regije(regija):
+    '''
+    Funkcija vrne IDje vseh lokacij, katere so v dani regiji.
+    '''
+    poizvedba = """
+        SELECT id
+        FROM lokacija
+        WHERE regija = ?
+        ORDER BY id
+        """
+    idji_lokacij =[]
+    for (id_lokacije,) in conn.execute(poizvedba, [regija]):
+        idji_lokacij.append(id_lokacije)
+    return idji_lokacij
+
+# ISKANJE PO VRSTI LOKACIJE
+def seznam_vrst_lokacij():
+    '''
+    Funkcija poišče vse vrste lokacij in vrne seznam vseh vrst.
+    To funkcijo potrebujemo zaradi možnega dodajanja novih vrst.
+    '''
+    poizvedba = """
+        SELECT naziv
+        FROM vrsta
+    """
+    vrste = []
+    for (naziv_vrste,) in conn.execute(poizvedba):
+        vrste.append(naziv_vrste)
+    return vrste
+
+def lokacije_glede_na_vrsto(vrsta):
+    """
+    Funkcija vrne seznam IDjev vseh lokacij, ki spadajo pod dano vrsto.
+    """
+    poizvedba = """
+        SELECT lokacija.id
+        FROM lokacija
+        JOIN pripadaVrsta ON lokacija.id = pripadaVrsta.lokacija
+        JOIN vrsta ON pripadaVrsta.vrsta = vrsta.id
+        WHERE vrsta.naziv = ?
+        ORDER BY lokacija.id
+    """
+    idji_lokacij = []
+    for (id_lokacije,) in conn.execute(poizvedba, [vrsta]):
+        idji_lokacij.append(id_lokacije)
+    return idji_lokacij
+
+# ISKANJE PO NAMENU LOKACIJE
+def seznam_namenov_lokacij():
+    '''
+    Funkcija poišče vse namene lokacij in vrne seznam vseh namenov.
+    To funkcijo potrebujemo zaradi možnega dodajanja novih namenov.
+    '''
+    poizvedba = """
+        SELECT naziv
+        FROM namen
+    """
+    nameni = []
+    for (naziv_namena,) in conn.execute(poizvedba):
+        nameni.append(naziv_namena)
+    return nameni
+
+def lokacije_glede_na_namen(namen):
+    """
+    Funkcija vrne seznam IDjev vseh lokacij, ki spadajo pod dan namen.
+    """
+    poizvedba = """
+        SELECT lokacija.id
+        FROM lokacija
+        JOIN pripadaNamen ON lokacija.id = pripadaNamen.lokacija
+        JOIN namen ON pripadaNamen.namen = namen.id
+        WHERE namen.naziv = ?
+        ORDER BY lokacija.id
+    """
+    idji_lokacij = []
+    for (id_lokacije,) in conn.execute(poizvedba, [namen]):
+        idji_lokacij.append(id_lokacije)
+    return idji_lokacij
+
+# ISKANJE LOKACIJ S POGOSTITVIJO IN PRENOČIŠČEM
+def lokacije_pogostitev_in_prenocisce():
+    """
+    Funkcija vrne seznam IDjev vseh lokacij, ki ponujajo pogostitev in prenočišče.
+    """
+    poizvedba = """
+        SELECT id 
+        FROM lokacija
+        WHERE pogostitev = 'Da'
+        AND prenocišce = 'Da'
+        ORDER BY id
+    """
+    idji_lokacij = []
+    for (id_lokacije,) in conn.execute(poizvedba):
+        idji_lokacij.append(id_lokacije)
+    return idji_lokacij
+
+# ISKANJE LOKACIJ ZA OTROKE
+def lokacije_otroci():
+    """
+    Funkcija vrne seznam IDjev vseh lokacij, ki ponujajo animacije za otroke.
+    """
+    poizvedba = """
+        SELECT id 
+        FROM lokacija
+        WHERE zaOtroke = 'Da'
+        ORDER BY id
+    """
+    idji_lokacij = []
+    for (id_lokacije,) in conn.execute(poizvedba):
+        idji_lokacij.append(id_lokacije)
+    return idji_lokacij    
+
+# IZPISOVANJE PODATKOV LOKACIJ        
 def podatki_lokacij(idji_lokacij):
     """
     Funkcija vrne osnovne podatke vseh lokacij z danimi IDji.
@@ -146,4 +224,5 @@ def podatki_lokacije(id_lokacije):
     else:
         naziv, regija, url = osnovni_podatki
     return naziv, regija, url
+
         
