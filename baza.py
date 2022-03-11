@@ -133,28 +133,28 @@ class Lokacija(Tabela):
                 opis         TEXT NOT NULL,
                 url          TEXT,
                 pogostitev   TEXT CHECK (pogostitev IN ('Da', 'Ne')),
-                prenocišce   TEXT CHECK (prenocišce IN ('Da', 'Ne')),
+                prenočišče   TEXT CHECK (prenočišče IN ('Da', 'Ne')),
                 vstopnina    TEXT CHECK (vstopnina IN ('Da', 'Ne')),
                 zaOtroke    TEXT CHECK (zaOtroke IN ('Da', 'Ne'))
             );
         """)
 
 
-class Cas(Tabela):
+class Čas(Tabela):
     """
-    Tabela za cas obiska.
+    Tabela za čas obiska.
     """
-    ime = "cas"
-    podatki = "podatki/cas.csv"
+    ime = "čas"
+    podatki = "podatki/čas.csv"
 
     def ustvari(self):
         """
-        Ustvari tabelo cas.
+        Ustvari tabelo čas.
         """
         self.conn.execute("""
-            CREATE TABLE cas(
+            CREATE TABLE čas(
                 lokacija  INTEGER REFERENCES lokacija (id),
-                tip       TEXT CHECK (tip IN ('Poletni cas', 'Zimski cas', 'Slabo vreme')),
+                tip       TEXT CHECK (tip IN ('Poletni čas', 'Zimski čas', 'Slabo vreme')),
             
             PRIMARY KEY (
                 lokacija,
@@ -371,14 +371,13 @@ def pripravi_tabele(conn):
     """
     uporabnik = Uporabnik(conn)
     lokacija = Lokacija(conn)
-    cas = Cas(conn)
+    čas = Čas(conn)
     vrsta = Vrsta(conn)
     namen = Namen(conn)
     pripadaVrsta = PripadaVrsta(conn, vrsta)
     pripadaNamen = PripadaNamen(conn, namen)
 
-    return [uporabnik, lokacija, cas, vrsta, namen, pripadaVrsta, pripadaNamen]
-
+    return [uporabnik, lokacija, čas, vrsta, namen, pripadaVrsta, pripadaNamen]
 
 def ustvari_bazo_ce_ne_obstaja(conn):
     """
