@@ -43,7 +43,7 @@ class Tabela:
         """
         if self.podatki is None:
             return
-        with open(self.podatki) as datoteka:
+        with open(self.podatki, encoding = 'utf-8') as datoteka:
             podatki = csv.reader(datoteka, delimiter=";")
             stolpci = next(podatki)
             for vrstica in podatki:
