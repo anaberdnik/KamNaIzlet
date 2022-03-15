@@ -1,5 +1,4 @@
 import csv
-from geslo import sifriraj_geslo
 
 
 PARAM_FMT = ":{}" # za SQLite
@@ -79,36 +78,6 @@ class Tabela:
         cur = self.conn.execute(poizvedba, podatki)
         return cur.lastrowid
 
-class Uporabnik(Tabela):
-    """
-    Tabela za uporabnike.
-    """
-    ime = "uporabnik"
-    podatki = "podatki/uporabnik.csv"
-
-    def ustvari(self):
-        """
-        Ustvari tabelo uporabnik.
-        """
-        self.conn.execute("""
-            CREATE TABLE uporabnik (
-                id        INTEGER PRIMARY KEY AUTOINCREMENT,
-                ime       TEXT NOT NULL UNIQUE,
-                zgostitev TEXT NOT NULL,
-                sol       TEXT NOT NULL
-            )
-        """)
-
-    def dodaj_vrstico(self, **podatki):
-        """
-        Dodaj uporabnika.
-        ce sol ni podana, zašifrira podano geslo.
-        Argumenti:
-        - poimenovani parametri: vrednosti v ustreznih stolpcih
-        """
-        if podatki.get("sol", None) is None and podatki.get("zgostitev", None) is not None:
-            podatki["zgostitev"], podatki["sol"] = sifriraj_geslo(podatki["zgostitev"])
-        return super().dodaj_vrstico(**podatki)
     
 class Lokacija(Tabela):
     """
@@ -135,7 +104,8 @@ class Lokacija(Tabela):
                 pogostitev   TEXT CHECK (pogostitev IN ('Da', 'Ne')),
                 prenočišče   TEXT CHECK (prenočišče IN ('Da', 'Ne')),
                 vstopnina    TEXT CHECK (vstopnina IN ('Da', 'Ne')),
-                zaOtroke    TEXT CHECK (zaOtroke IN ('Da', 'Ne'))
+                zaOtroke    TEXT CHECK (zaOtroke IN ('Da', 'Ne')),
+                urlSlike   TEXT    DEFAULT ('https://www.ekoskladovnica.si/Content/images/ni_slike.jpg') 
             );
         """)
 
@@ -369,7 +339,6 @@ def pripravi_tabele(conn):
     """
     Pripravi objekte za tabele.
     """
-    uporabnik = Uporabnik(conn)
     lokacija = Lokacija(conn)
     čas = Čas(conn)
     vrsta = Vrsta(conn)
@@ -377,7 +346,7 @@ def pripravi_tabele(conn):
     pripadaVrsta = PripadaVrsta(conn, vrsta)
     pripadaNamen = PripadaNamen(conn, namen)
 
-    return [uporabnik, lokacija, čas, vrsta, namen, pripadaVrsta, pripadaNamen]
+    return [lokacija, čas, vrsta, namen, pripadaVrsta, pripadaNamen]
 
 def ustvari_bazo_ce_ne_obstaja(conn):
     """
@@ -387,3 +356,4 @@ def ustvari_bazo_ce_ne_obstaja(conn):
         cur = conn.execute("SELECT COUNT(*) FROM sqlite_master")
         if cur.fetchone() == (0, ):
             ustvari_bazo(conn)
+
