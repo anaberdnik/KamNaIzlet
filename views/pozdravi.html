@@ -1,0 +1,14 @@
+<html>
+    <head>
+        <title>Pozdravna stran za {{ime}}</title>
+    </head>
+    <body>
+        Živjo, <b>{{ime}}</b>!
+        Tukaj imaš seznam števil:
+        <ul>
+            % for i in range(5):
+            <li>{{i ** 2}}</li>
+            % end
+        </ul>
+    </body>
+</html>
