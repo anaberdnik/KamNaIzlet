@@ -4,7 +4,8 @@ Projektna naloga pri predmetu Podatkovne baze 1.
 Ideja je uporabniku predstaviti nabor lokacij oz. idej, kam se lahko odpravi na izlet po sloveniji. Pri tem lahko iskanje zoža glede na svoje preference: npr. zanimajo ga lokacije, kjer si lahko po potrebi uredi tudi prenočišče, ali pa lokacije, ki so namenjene rekreaciji / sprostivi / zabavi in podobno.
 
 ER diagram:
-![ERD](https://user-images.githubusercontent.com/28532399/145731108-251c36ba-59cf-4bb7-9807-c24197bc2dd1.png)
+![erd](https://user-images.githubusercontent.com/28532399/158489170-1db395ed-90e8-49e2-947b-ad5df6c455bb.png)
+
 
 Glavna entiteta **Lokacija** predstavlja osnovne lastnosti vsake lokacije: id, naziv, regija, kratek opis, URL povezava do strani lokacije in URL povezava do slike lokacije ter informacije ali lokacija omogoča pogostitev (hrana in pijača), prenočišče, vstopnino ter ali organizira delavnice za otroke.
 
