@@ -1,0 +1,9 @@
+% rebase('osnova.html')
+
+<h1>Lokacije z animacijami ali delavnicami za otroke</h1>
+
+<ul>
+% for i in range(len(idji_otroci)):
+        <p><a class="one" href='/izpisi_podatke_lokacije_otroci_vmesna/{{idji_otroci[i]}}'>{{lokacije_otroci[i]}}</a></p>
+% end
+</ul>

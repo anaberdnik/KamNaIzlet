@@ -18,8 +18,13 @@
         cursor: pointer;
     }
 
-    a.one:link {
+    a.one:link, a.one:visited {
         color: black;
+        cursor: pointer;
+    }
+
+    a.one:hover {
+        color:rgb(156, 188, 248);
         cursor: pointer;
     }
 
@@ -50,7 +55,7 @@
     <div class="content">
         {{!base}}
 
-        <p><a class="two" href="/">Začetna stran</a></p>
+        <p><a class="two" href="/">Začetna stran</a></p><br />
     </div>
 </body>
 

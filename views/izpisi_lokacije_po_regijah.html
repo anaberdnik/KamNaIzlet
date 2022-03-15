@@ -2,6 +2,8 @@
 
 <h1>Lokacije glede na izbrano regijo</h1>
 
+<ul>
 % for i in range(len(idji_po_regijah)):
         <p><a class="one" href='/izpisi_podatke_lokacije_po_regijah_vmesna/{{idji_po_regijah[i]}}'>{{lokacije_po_regijah[i]}}</a></p>
 % end
+</ul>

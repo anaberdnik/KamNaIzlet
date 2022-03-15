@@ -1,0 +1,9 @@
+% rebase('osnova.html')
+
+<h1>Lokacije brez vstopnine</h1>
+
+<ul>
+% for i in range(len(idji_vstopnina)):
+        <p><a class="one" href='/izpisi_podatke_lokacije_vstopnina_vmesna/{{idji_vstopnina[i]}}'>{{lokacije_vstopnina[i]}}</a></p>
+% end
+</ul>

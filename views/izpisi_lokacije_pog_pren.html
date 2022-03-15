@@ -1,0 +1,9 @@
+% rebase('osnova.html')
+
+<h1>Lokacije s pogostitvijo in prenočiščem</h1>
+
+<ul>
+% for i in range(len(idji_pog_pren)):
+        <p><a class="one" href='/izpisi_podatke_lokacije_pog_pren_vmesna/{{idji_pog_pren[i]}}'>{{lokacije_pog_pren[i]}}</a></p>
+% end
+</ul>
