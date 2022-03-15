@@ -53,8 +53,6 @@ def prikazi_podatke_lokacije():
 # IZBIRA 1
 def izberi_regijo():
     regije = ['Pomurska', 'Podravska', 'Koroška', 'Savinjska', 'Posavska', 'Zasavska', 'Osrednjeslovenska', 'Gorenjska', 'Goriška', 'Obalno-kraška', 'Primorsko-notranjska', 'Jugovzhodna-Slovenija']
-    print()
-    print("Izberite regijo, ki vas zanima: ")
     izbira = izberi_moznost([ 
         'Pomurska',
         'Podravska',
@@ -72,6 +70,8 @@ def izberi_regijo():
     return regije[izbira]
     
 def poisci_lokacije_regije():
+    print()
+    print("Izberite regijo, ki vas zanima: ")
     regija = izberi_regijo()
     idji_lokacij = model.poisci_lokacije_regije(regija)
     print()
@@ -171,14 +171,89 @@ def poisci_lokacije_brez_vstopnine():
     id_lokacije = idji_lokacij[izbira]
     izpis_podatkov_lokacije(id_lokacije)
     
+# IZBIRA 8
+def dodaj_lokacijo():
+    naziv = input("Vnesite naziv lokacije: ")
+    print()
+    print("V katero regijo spada lokacija?")
+    regija = izberi_regijo()
+    print()
+    opis = input("Vnesite opis lokacije: ")
+    print()
+    url = input("Vnesite url povezavo do lokacije: ")
+    print()
+    urlSlike = input("Vnesite url povezavo do slike lokacije: ")
+    print()
+    print("Ali lokacija omogoča pogostitev (hrana / pijača)?")
+    pogostitev = da_ali_ne()
+    print()
+    print("Ali lokacija omogoča prenočišče?")
+    prenočišče = da_ali_ne()
+    print()
+    print("Ali je za obisk lokacije potrebno plačilo vstopnine?")
+    vstopnina = da_ali_ne()
+    print()
+    print("Ali lokacija organizira animacije ali delavnice za otroke? ")
+    zaOtroke = da_ali_ne()
+    osnovne_informacije = [naziv, regija, opis, url, pogostitev, prenočišče, vstopnina, zaOtroke, urlSlike]
+    print()
+    print("Izberite vrsto/e lokacije: ")
+    vse_vrste = model.seznam_vrst_lokacij()
+    vrste = []
+    while len(vrste) < len(vse_vrste):
+        vrsta = izberi_vrsto()
+        if vrsta in vrste:
+            print("Ta vrsta je že izbrana!")
+            print()
+            continue
+        vrste.append(vrsta)
+        print('Ali želite dodati še kakšno vrsto?')
+        izbira = da_ali_ne()
+        if izbira == 'Ne':
+            break
+    print()
+    print("Izberite namen/e lokacije: ")
+    vsi_nameni = model.seznam_namenov_lokacij()
+    nameni = []
+    while len(nameni) < len(vsi_nameni):
+        namen = izberi_namen()
+        if namen in nameni:
+            print("Ta namen je že izbran!")
+            print()
+            continue
+        nameni.append(namen)
+        print('Ali želite dodati še kakšen namen?')
+        izbira = da_ali_ne()
+        if izbira == 'Ne':
+            break
+    print()
+    print("Izberite primeren čas obiska lokacije: ")
+    vsi_časi = ["Poletni čas", "Zimski čas", "Slabo vreme"]
+    časi = []
+    while len(časi) < len(vsi_časi):
+        izbira = izberi_moznost(vsi_časi)
+        čas = vsi_časi[izbira]
+        if čas in časi:
+            print("Ta čas obiska je že izbran!")
+            print()
+            continue
+        časi.append(čas)
+        print('Ali želite dodati še kakšen čas obiska?')
+        izbira = da_ali_ne()
+        if izbira == 'Ne':
+            break
+    print("Lokacija je dodana!")
+    model.dodajanje_lokacije(osnovne_informacije, vrste, nameni, časi)
 
+
+    
 # IZPIS PODATKOV LOKACIJE
 def izpis_podatkov_lokacije(id_lokacije):
     '''
     Funkcija prejme ID lokacije in izpiše vse njene podatke.
     '''
     print()
-    naziv, regija, opis, url, pogostitev, prenočišče, vstopnina, zaOtroke = model.podatki_lokacije(id_lokacije)
+    naziv, regija, opis, url, pogostitev, prenočišče, vstopnina, zaOtroke, urlSlike = model.podatki_lokacije(id_lokacije)
     vrste = model.vrste_lokacije(id_lokacije)
     nameni = model.nameni_lokacije(id_lokacije)
     časi_obiska_lokacije = model.čas_obiska_lokacije(id_lokacije)
@@ -193,11 +268,18 @@ def izpis_podatkov_lokacije(id_lokacije):
     print(f"   > Omogoča prenočišče: {prenočišče}")
     print(f"   > Ima vstopnino: {vstopnina}")
     print(f"   > Organizira delavnice za otroke: {zaOtroke}")
+    print(f"   > Povezava do slike: {urlSlike}")
     print(f"   > Kratek opis: {opis}")
     print(f"   > Vrste: {', '.join(vrste)}")
     print(f"   > Nameni obiska: {', '.join(nameni)}")
     print(f"   > Primeren čas obiska: {', '.join(časi_obiska_lokacije)}")
     print()
+    
+# IZBIRA DA ALI NE
+def da_ali_ne():
+    moznosti = ['Da', 'Ne']
+    izbira = izberi_moznost(moznosti)
+    return moznosti[izbira]
     
     
 #MENI (izbire):
@@ -213,6 +295,7 @@ def prikazi_moznosti():
         'prikaži lokacije z možnostjo pogostitve in prenočišča',
         'prikaži lokacije z animacijami za otroke',
         'prikaži lokacije brez vstopnine',
+        'dodaj lokacijo',
         'izhod',
         ])
     if izbira == 0:
@@ -232,6 +315,8 @@ def prikazi_moznosti():
     elif izbira == 7:
         poisci_lokacije_brez_vstopnine()
     elif izbira == 8:
+        dodaj_lokacijo()
+    elif izbira == 9:
         print('Nasvidenje')
         exit()
 
@@ -241,3 +326,4 @@ def main():
         prikazi_moznosti()
 
 main()
+
