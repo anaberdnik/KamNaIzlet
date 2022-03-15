@@ -104,4 +104,4 @@ def podatki_lokacije_po_času(id):
     return bottle.template('izpisi_podatke_lokacije.html', pod = podatki)
 
 
-bottle.run(debug=True, reloader=True)
+bottle.run()
