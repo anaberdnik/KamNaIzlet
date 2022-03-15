@@ -4,10 +4,38 @@
 <head>
 
 <style>
-    
+    body {
+        background-color: aliceblue;
+    }
 
+    h1 {
+        text-align: center;
+        color: cornflowerblue;
+      }
+
+    a:link {
+        color: cornflowerblue;
+        cursor: pointer;
+    }
+
+    a.one:link {
+        color: black;
+        cursor: pointer;
+    }
+
+    .button1 {
+        background-color: white; 
+        color: black; 
+        border: 2px solid cornflowerblue;
+      }
+      
+    .button1:hover {
+        background-color: cornflowerblue;
+        color: white;
+      }
 
 </style>
+
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Kam na izlet</title>
@@ -22,7 +50,7 @@
     <div class="content">
         {{!base}}
 
-        <p><a href="/">Začetna stran</a></p>
+        <p><a class="two" href="/">Začetna stran</a></p>
     </div>
 </body>
 

@@ -1,7 +1,8 @@
 % rebase('osnova.html')
 
-<h1>Lokacije:</h1>
+<h1>Lokacije glede na čas obiska</h1>
 
 % for i in range(len(idji_po_času)):
-        <p><a href='/izpisi_podatke_lokacije_vmesna/{{idji_po_času[i]}}'>{{lokacije_po_času[i]}}</a></p>
-% end
+        <p><a class="one" href='/izpisi_podatke_lokacije_vmesna/{{idji_po_času[i]}}'>{{lokacije_po_času[i]}}</a></p>
+% end   
+
