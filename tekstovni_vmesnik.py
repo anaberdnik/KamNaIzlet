@@ -295,7 +295,6 @@ def prikazi_moznosti():
         'prikaži lokacije z možnostjo pogostitve in prenočišča',
         'prikaži lokacije z animacijami za otroke',
         'prikaži lokacije brez vstopnine',
-        'dodaj lokacijo',
         'izhod',
         ])
     if izbira == 0:
@@ -315,8 +314,6 @@ def prikazi_moznosti():
     elif izbira == 7:
         poisci_lokacije_brez_vstopnine()
     elif izbira == 8:
-        dodaj_lokacijo()
-    elif izbira == 9:
         print('Nasvidenje')
         exit()
 
