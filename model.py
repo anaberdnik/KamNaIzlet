@@ -9,12 +9,6 @@ conn.execute('PRAGMA foreign_keys = ON')
 
 lokacija, čas, vrsta, namen, pripadaVrsta, pripadaNamen = baza.pripravi_tabele(conn)
 
-class LoginError(Exception):
-    """
-    Napaka ob napacnem uporabniškem imenu ali geslu.
-    """
-    pass
-
 
 # ISKANJE LOKACIJE PO IMENU
 def poisci_lokacije(niz):
